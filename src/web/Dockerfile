@@ -1,8 +1,12 @@
-FROM nginx:trixie-perl
+FROM node:alpine
 
-COPY index.html /usr/share/nginx/html
+WORKDIR /usr/src/app
 
-EXPOSE 80
+COPY . .
 
-# docker build -t lab/web .
-# docker run --name test3 -p 8081:80 lab/web
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+
+# docker build -t iac/api .
+# docker run -p 3000:3000 iac/api
