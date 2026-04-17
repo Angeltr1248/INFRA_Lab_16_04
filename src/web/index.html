@@ -1,11 +1,22 @@
+cd ../web01
+cat <<EOF > index.html
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web 01</title>
-</head>
+<html lang="es">
+<head><title>Web 01</title></head>
 <body>
-    <h1>WEB01</h1>
+    <h1>WEB01 - Panel de Control</h1>
+    <button onclick="probarConexion()">Probar Flujo Completo</button>
+    <pre id="resultado" style="margin-top: 20px; padding: 10px; background: #eee;"></pre>
+
+    <script>
+        function probarConexion() {
+            document.getElementById('resultado').innerText = "Cargando...";
+            fetch('http://localhost:3000/api/test')
+                .then(res => res.json())
+                .then(data => document.getElementById('resultado').innerText = JSON.stringify(data, null, 2))
+                .catch(err => document.getElementById('resultado').innerText = 'Error: ' + err);
+        }
+    </script>
 </body>
 </html>
+EOF
